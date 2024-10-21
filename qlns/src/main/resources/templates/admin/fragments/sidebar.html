@@ -1,0 +1,34 @@
+<aside class="main-sidebar" th:fragment="sidebar" xmlns:th="">
+    <!-- sidebar: style can be found in sidebar.less -->
+
+    <div class="row justify-content-center">
+        <img class="d-block mb-4 col-7" th:src="@{/assets/image/aeon-750x468.jpg}" alt="logo">
+    </div>
+    <ul class="list-unstyled d-flex flex-column gap-2">
+        <li class="cursor-pointer active menu-item" data-index-frame-target="1">
+            <img th:src="@{/assets/icon/grid.png}" alt="Overview" class="icon-menu">
+            Overview
+        </li>
+        <li class="cursor-pointer menu-item" data-index-frame-target="2">
+            <img th:src="@{/assets/icon/task.png}" alt="Tasks" class="icon-menu">
+            Tasks
+        </li>
+        <li class="cursor-pointer menu-item" data-index-frame-target="3">
+            <img th:src="@{/assets/icon/stack-add.png}" alt="Recruitment" class="icon-menu">
+            Recruitment
+        </li>
+        <li class="cursor-pointer menu-item" data-index-frame-target="4">
+            <img th:src="@{/assets/icon/event.png}" alt="Events" class="icon-menu">
+            Events
+        </li>
+        <li class="cursor-pointer menu-item" data-index-frame-target="5">
+            <img th:src="@{/assets/icon/signature.png}" alt="e-Signature" class="icon-menu">
+            e-Signature
+        </li>
+        <li class="cursor-pointer menu-item" data-index-frame-target="6">
+            <img th:src="@{/assets/icon/setting.png}" alt="Settings" class="icon-menu">
+            Settings
+        </li>
+    </ul>
+    <!-- /.sidebar -->
+</aside>

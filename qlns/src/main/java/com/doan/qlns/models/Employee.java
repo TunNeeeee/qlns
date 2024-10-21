@@ -3,6 +3,7 @@ package com.doan.qlns.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +24,7 @@ public class Employee implements UserDetails {
     private Long id;
 
     private String name;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
     private String address;
     private String phone;

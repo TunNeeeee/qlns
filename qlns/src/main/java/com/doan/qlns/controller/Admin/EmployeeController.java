@@ -1,4 +1,4 @@
-package com.doan.qlns.controller;
+package com.doan.qlns.controller.Admin;
 
 import com.doan.qlns.models.Employee;
 import com.doan.qlns.service.EmployeeService;
@@ -17,19 +17,19 @@ public class EmployeeController {
     @GetMapping
     public String listEmployees(Model model) {
         model.addAttribute("employees", employeeService.getAllEmployees());
-        return "employee-list";
+        return "admin/employee/index";
     }
 
     @GetMapping("/new")
     public String showCreateForm(Model model) {
         model.addAttribute("employee", new Employee());
-        return "employee-form";
+        return "admin/employee/add";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/new")
     public String saveEmployee(@ModelAttribute("employee") Employee employee) {
         employeeService.saveEmployee(employee);
-        return "redirect:/employees";
+        return "redirect:/admin/employees";
     }
 
     @GetMapping("/edit/{id}")
