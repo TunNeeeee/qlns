@@ -1,0 +1,67 @@
+/**
+* Author: Nguyen Dinh Lam
+* Email: kiminonawa1305@gmail.com
+* Phone number: +84 855354919
+* Create at: 6:04 AM - 29/09/2024
+*  User: lam-nguyen
+**/
+
+@keyframes top-to-bottom {
+    0% {
+        transform: translateX(0px) rotateY(0deg);
+        z-index: 2;
+    }
+    50% {
+        transform: translateX(50px) rotateY(90deg);
+        z-index: 2;
+    }
+    51%{
+        z-index: 1;
+    }
+    100% {
+        transform: translateX(0px) rotateY(180deg);
+        z-index: 1;
+    }
+}
+
+@keyframes bottom-to-top {
+    0% {
+        transform: translateX(0px) rotateY(180deg);
+        z-index: 1;
+    }
+    50% {
+        transform: translateX(-50px) rotateY(90deg);
+        z-index: 1;
+    }
+    51%{
+        z-index: 2;
+    }
+    100% {
+        transform: translateX(0px) rotateY(0deg);
+        z-index: 2;
+    }
+}
+
+.frame-form {
+    width: 400px;
+    height: 500px;
+    margin-inside: auto;
+}
+
+.form-forget-password.disable, .form-login.disable {
+    transform: rotateY(180deg);
+}
+
+.form-forget-password.active, .form-login.active {
+    transform: rotateY(0deg);
+}
+
+/*
+.frame-form:hover .form-signup {
+   animation: linear 0.5s top-to-bottom;
+}
+
+.frame-form:hover .form-login {
+    animation: linear 0.5s bottom-to-top;
+}
+*/

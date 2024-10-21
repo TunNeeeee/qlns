@@ -1,0 +1,52 @@
+/**
+* Author: Nguyen Dinh Lam
+* Email: kiminonawa1305@gmail.com
+* Phone number: +84 855354919
+* Create at: 6:07 AM - 29/09/2024
+*  User: lam-nguyen
+**/
+
+
+nav {
+    background-color: var(--primary);
+}
+
+.icon-menu {
+    --size: 30px;
+    width: var(--size);
+    height: var(--size);
+}
+
+nav li {
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    transition: 200ms linear;
+}
+
+nav li:hover, nav li.active {
+    background-color: var(--secondary);
+}
+
+main {
+    background-color: var(--background);
+}
+
+.arrow {
+    transition: 200ms linear;
+}
+
+.frame-data {
+    position: relative;
+    top: 300px;
+    transition: linear 200ms;
+}
+
+/*******************************/
+#signature-management-category li{
+    transition: 200ms linear;
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
+}
+#signature-management-category li.active, #signature-management-category li:hover {
+    border-bottom: 1px solid var(--primary);
+}

@@ -1,0 +1,78 @@
+/**
+* Author: Nguyen Dinh Lam
+* Email: kiminonawa1305@gmail.com
+* Phone number: +84 855354919
+* Create at: 9:23 PM - 28/09/2024
+*  User: lam-nguyen
+**/
+
+/* Reset CSS */
+html, body {
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+*, p {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+input::-ms-reveal,
+input::-ms-clear {
+    display: none;
+}
+
+:root {
+    --primary: #C20090;
+    --secondary: #B4B8C6;
+    --background: #F7F4FA;
+    --background-2:  #E4E4E4;
+}
+
+.color-primary {
+    color: var(--primary);
+}
+
+.fs-7 {
+    font-size: 13px;
+}
+
+.fs-8 {
+    font-size: 10px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.bg-primary {
+    background-color: var(--primary) !important;
+}
+
+.bg-none {
+    background: none !important;
+}
+
+.z-index-1 {
+    z-index: 1;
+}
+
+.z-index-2 {
+    z-index: 2;
+}
+
+.bg-E4E4E4 {
+    background-color: var(--background-2);
+}
+
+.border-E4E4E4 {
+    border-color: var(--background-2);
+}
+.color-E4E4E4 {
+    color: var(--background-2);
+}
+
+
+/********************************************/
