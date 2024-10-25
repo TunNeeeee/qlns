@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="admin/fragments/head::head">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper h-100">
+
+    <!--    <header th:replace="admin/fragments/header::header"></header>-->
+
+    <!-- =============================================== -->
+    <div class="row m-0" style="height: 100%">
+        <nav class="col-2">
+            <div th:replace="admin/fragments/sidebar::sidebar"></div>
+        </nav>
+
+        <main class="col-10 px-0 overflow-y-hidden">
+            <div class="w-100 bg-white p-2 px-4 d-flex justify-content-between align-items-center">
+                <img class="cursor-pointer" data-size="30" th:src="@{/assets/icon/menu.png}" alt="menu">
+                <div class="d-flex gap-4 align-items-center">
+                    <img class="cursor-pointer" th:src="@{/assets/icon/question.png}" alt="question" data-size="30"/>
+                    <div class="d-flex gap-1 align-items-center cursor-pointer">
+                        <img class="avatar rounded rounded-circle overflow-hidden" th:src="@{/assets/image/big_logo_light.png}" alt="avatar" data-size="30"/>
+                        <div>
+                            <p class="p-0 m-0">
+                                <span class="id-user fw-bold">654646</span>
+                                <span> | </span>
+                                <span class="name-user fw-bold">Nguyễn Đình Tuấn</span>
+                            </p>
+                            <span class="text-secondary fs-7">TA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="frame-data row p-2 mx-0" data-frame="2">
+                <h1>Tạo hợp đồng mới</h1>
+                <form id="contractForm" th:action="@{/admin/contracts/add}" th:object="${contract}" method="post" onsubmit="return validateForm()">
+                    <div>
+                        <label for="name">Tên hợp đồng:</label>
+                        <input type="text" id="name" th:field="*{contractType}" required />
+                        <span id="nameError" class="text-danger" style="display:none;">Loại hợp đồng không được để trống</span>
+                    </div>
+                    <div>
+                        <label for="startDate">Ngày bắt đầu:</label>
+                        <input type="date" id="startDate" th:field="*{startDate}" required />
+                        <span id="startDateError" class="text-danger" style="display:none;">Ngày bắt đầu phải là một ngày trong tương lai</span>
+                    </div>
+                    <div>
+                        <label for="endDate">Ngày kết thúc:</label>
+                        <input type="date" id="endDate" th:field="*{endDate}" required />
+                        <span id="endDateError" class="text-danger" style="display:none;">Ngày kết thúc phải sau ngày bắt đầu</span>
+                    </div>
+                    <div>
+                        <label>Chọn nhân viên:</label><br>
+                        <div id="employeeContainer">
+                            <!-- Hiển thị danh sách nhân viên từ model -->
+                            <th:block th:each="employee : ${employees}">
+                                <input type="checkbox" name="employeeIds" th:value="${employee.id}">
+                                <span th:text="${employee.name}"></span><br>
+                            </th:block>
+                        </div>
+                        <span id="employeeError" class="text-danger" style="display:none;">Phải chọn ít nhất một nhân viên</span>
+                    </div>
+                    <button type="submit">Tạo hợp đồng</button>
+                    <a th:href="@{/admin/employees#contract}">Quay lại</a>
+                </form>
+            </section>
+        </main>
+    </div>
+</div>
+
+<!-- jQuery 3 -->
+<div th:replace="admin/fragments/script::script"></div>
+
+<script>
+    function validateForm() {
+        let isValid = true;
+
+        // Kiểm tra loại hợp đồng
+        const contractType = document.getElementById('name').value.trim();
+        if (contractType === '') {
+            isValid = false;
+            document.getElementById('nameError').style.display = 'block';
+            document.getElementById('name').style.borderColor = 'red';
+        } else {
+            document.getElementById('nameError').style.display = 'none';
+            document.getElementById('name').style.borderColor = '';
+        }
+
+        // Kiểm tra ngày bắt đầu và ngày kết thúc
+        const startDate = new Date(document.getElementById('startDate').value);
+        const endDate = new Date(document.getElementById('endDate').value);
+        const currentDate = new Date();
+
+        if (startDate <= currentDate) {
+            isValid = false;
+            document.getElementById('startDateError').style.display = 'block';
+            document.getElementById('startDate').style.borderColor = 'red';
+        } else {
+            document.getElementById('startDateError').style.display = 'none';
+            document.getElementById('startDate').style.borderColor = '';
+        }
+
+        if (endDate <= startDate) {
+            isValid = false;
+            document.getElementById('endDateError').style.display = 'block';
+            document.getElementById('endDate').style.borderColor = 'red';
+        } else {
+            document.getElementById('endDateError').style.display = 'none';
+            document.getElementById('endDate').style.borderColor = '';
+        }
+
+        // Kiểm tra có ít nhất một nhân viên được chọn
+        const employeeCheckboxes = document.querySelectorAll('input[name="employeeIds"]:checked');
+        if (employeeCheckboxes.length === 0) {
+            isValid = false;
+            document.getElementById('employeeError').style.display = 'block';
+        } else {
+            document.getElementById('employeeError').style.display = 'none';
+        }
+
+        return isValid;
+    }
+</script>
+</body>
+</html>

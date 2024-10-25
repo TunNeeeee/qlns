@@ -17,14 +17,14 @@ nav {
     height: var(--size);
 }
 
-nav li {
+nav li a {
     color: white;
     border-radius: 5px;
     padding: 10px;
     transition: 200ms linear;
 }
 
-nav li:hover, nav li.active {
+nav li a:hover, nav li a.active {
     background-color: var(--secondary);
 }
 
@@ -43,10 +43,10 @@ main {
 }
 
 /*******************************/
-#signature-management-category li{
+#signature-management-category li a{
     transition: 200ms linear;
     border-bottom: 1px solid rgba(0, 0, 0, 0);
 }
-#signature-management-category li.active, #signature-management-category li:hover {
+#signature-management-category li a.active, #signature-management-category li a:hover {
     border-bottom: 1px solid var(--primary);
 }

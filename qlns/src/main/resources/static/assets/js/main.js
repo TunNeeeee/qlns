@@ -39,8 +39,8 @@ const loadFrameTable = (id) => {
      <button class="bg-none border-0 d-flex gap-2 align-items-center btn-sort">
                 <strong>${oldHtml}</strong>
                 <p class="d-flex flex-column justify-content-center align-items-center">
-                  <img style="width: 8px; height: 7px" src="assets/icon/bxs--up-arrow.png" alt="up">
-                  <img style="width: 8px; height: 7px" src="assets/icon/bxs--down-arrow.png"
+                  <img style="width: 8px; height: 7px" src="/assets/icon/bxs--up-arrow.png" alt="up">
+                  <img style="width: 8px; height: 7px" src="/assets/icon/bxs--down-arrow.png"
                      alt="down">
                 </p>
      </button>
@@ -53,25 +53,7 @@ const loadFrameTable = (id) => {
 
         $(col).css({width: size})
     })
-    repaintTable(id)
-    $(".btn-sort").click(function () {
-        const status = $(this).data("status");
-        $(this).find("img").css({opacity: 0})
-        switch (status) {
-            case undefined:
-            case SORT_TYPE.ASC:
-                $(this).data("status", SORT_TYPE.DESC)
-                $(this).find("img").eq(0).css({opacity: 1})
-                break;
-            case SORT_TYPE.DESC:
-                $(this).data("status", SORT_TYPE.None)
-                $(this).find("img").eq(1).css({opacity: 1})
-                break;
-            default:
-                $(this).data("status", SORT_TYPE.ASC)
-                $(this).find("img").css({opacity: 1}).show()
-        }
-    })
+    eventSortable()
 }
 
 const repaintTable = (id) => {
@@ -100,8 +82,48 @@ const repaintTable = (id) => {
                     ${table[0].outerHTML}
                </div>`)
 
-
     table.remove()
+
+    eventSortable()
+}
+
+function repaintPaintTableHaveMaxRow(id){
+    const table = $(`table${id}.ln-table`);
+    const maxRow = table.data("max-row");
+    if(!maxRow) return
+    table.parent().css("max-height", table.find("tbody tr").eq(0).outerHeight() * maxRow + table.find("thead").outerHeight() + "px")
+}
+
+function eventSortable(){
+     $(".btn-sort").click(function () {
+                const status = $(this).data("status");
+                $(this).find("img").css({opacity: 0})
+                switch (status) {
+                    case undefined:
+                    case SORT_TYPE.ASC:
+                        $(this).data("status", SORT_TYPE.DESC)
+                        $(this).find("img").eq(0).css({opacity: 1})
+                        break;
+                    case SORT_TYPE.DESC:
+                        $(this).data("status", SORT_TYPE.None)
+                        $(this).find("img").eq(1).css({opacity: 1})
+                        break;
+                    default:
+                        $(this).data("status", SORT_TYPE.ASC)
+                        $(this).find("img").css({opacity: 1}).show()
+                }
+
+                 var myEvent = new CustomEvent('onSorted', {
+                    detail: { status: status ?? SORT_TYPE.ASC }
+                 });
+
+                 this.dispatchEvent(myEvent);
+            })
+
+      $(".btn-sort").on("onSorted", function(e){
+        console.log(e.detail.status)
+      })
+
 }
 
 function uuidv4() {

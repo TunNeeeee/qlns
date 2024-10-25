@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký biểu mẫu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Thêm Font Awesome -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="date"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .success-message {
+            text-align: center;
+            color: green;
+            margin-top: 15px;
+        }
+        .error-message {
+            text-align: center;
+            color: red;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h1>Đăng ký biểu mẫu</h1>
+
+    <form th:action="@{/user/form-request}" th:object="${formRequest}" method="post">
+        <label for="formType">Loại biểu mẫu:</label>
+        <input type="text" id="formType" th:field="*{formType}" placeholder="Nhập loại biểu mẫu" required>
+
+        <label for="additionalInfo">Nhập thông tin: </label>
+        <input type="text" id="additionalInfo" th:field="*{additionalInfo}" >
+
+        <label for="startDate">Ngày bắt đầu:</label>
+        <input type="date" id="startDate" th:field="*{startDate}" required>
+
+        <label for="endDate">Ngày kết thúc:</label>
+        <input type="date" id="endDate" th:field="*{endDate}" required>
+
+        <button type="submit">Gửi yêu cầu</button>
+    </form>
+    <button onclick="window.history.back()" style="margin-top: 10px;">Quay lại</button> <!-- Nút Quay lại -->
+    <div th:if="${param.success}" class="success-message">
+        <p>Yêu cầu đã được gửi thành công!</p>
+    </div>
+    <div th:if="${param.error}" class="error-message">
+        <p>Đã xảy ra lỗi. Vui lòng thử lại.</p>
+    </div>
+</div>
+
+</body>
+</html>

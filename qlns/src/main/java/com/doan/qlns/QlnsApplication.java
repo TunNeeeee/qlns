@@ -14,7 +14,7 @@ public class QlnsApplication {
 		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 		// Mật khẩu gốc
-		String rawPassword = "Admin@123";
+		String rawPassword = "Van@123";
 
 		// Mã hóa mật khẩu
 		String encodedPassword = passwordEncoder.encode(rawPassword);

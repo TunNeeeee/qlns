@@ -27,26 +27,26 @@ public class LogInController {
         return "login";
     }
 
-    @GetMapping("/register")
-    public String register(@NotNull Model model) {
-        model.addAttribute("user", new Employee());
-        return "sign-up";
-    }
-    @PostMapping("/register")
-    public String register(@Valid @ModelAttribute("user") Employee user, @NotNull BindingResult bindingResult,
-                           Model model) {
-        if (bindingResult.hasErrors()) { // Kiểm tra nếu có lỗi validate
-            var errors = bindingResult.getAllErrors()
-                    .stream()
-                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                    .toArray(String[]::new);
-            model.addAttribute("errors", errors);
-            return "sign-up";
-        }
-        userService.save(user);
-        userService.setDefaultRole(user.getUsername());
-        return "redirect:/login";
-    }
+//    @GetMapping("/register")
+//    public String register(@NotNull Model model) {
+//        model.addAttribute("user", new Employee());
+//        return "sign-up";
+//    }
+//    @PostMapping("/register")
+//    public String register(@Valid @ModelAttribute("user") Employee user, @NotNull BindingResult bindingResult,
+//                           Model model) {
+//        if (bindingResult.hasErrors()) { // Kiểm tra nếu có lỗi validate
+//            var errors = bindingResult.getAllErrors()
+//                    .stream()
+//                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+//                    .toArray(String[]::new);
+//            model.addAttribute("errors", errors);
+//            return "sign-up";
+//        }
+//        userService.save(user);
+//        userService.setDefaultRole(user.getUsername());
+//        return "redirect:/login";
+//    }
 }
 
 

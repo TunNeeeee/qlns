@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/index.css}">
+
+    <script th:src="@{/assets/js/bootstrap.min.js}"></script>
+    <script th:src="@{/assets/js/jquery-3.7.1.min.js}"></script>
+    <title>Đăng ký tăng ca</title>
+</head>
+<body>
+<header class="d-flex flex-nowrap bg-primary overflow-y-hidden align-items-center">
+    <img th:src="@{/assets/image/big_logo_light.png}" alt="logo" class="col-5" style="height: 45px; width: 150px">
+    <div class="d-flex flex-nowrap bg-white w-100 justify-content-between" style="margin-top: 5px">
+        <div class="d-flex flex-nowrap">
+            <div class="d-flex flex-nowrap align-items-center gap-2 bg-primary px-2">
+                <img th:src="@{/assets/icon/pop--menu.png}" alt="menu" data-size="15">
+                <div class="d-flex flex-nowrap align-items-center gap-1">
+                    <span class="text-uppercase text-nowrap text-white fs-8">Chính sách phúc lợi nhân viên</span>
+                    <img th:src="@{/assets/icon/bxs--down-arrow-white.png}" alt="menu" data-size="15">
+                </div>
+            </div>
+            <div class="d-flex flex-nowrap align-items-center gap-1 px-2">
+                <span class="text-uppercase text-nowrap fs-8">Quản lý phép</span>
+                <img th:src="@{/assets/icon/bxs--down-arrow-secondary.png}" alt="menu" data-size="15">
+            </div>
+            <div class="d-flex flex-nowrap align-items-center gap-1 px-2">
+                <span class="text-uppercase text-nowrap fs-8">Bổ sung dữ liệu quản lý thẻ</span>
+                <img th:src="@{/assets/icon/bxs--down-arrow-secondary.png}" alt="menu" data-size="15">
+            </div>
+            <div class="d-flex flex-nowrap align-items-center gap-1 px-2">
+                <span class="text-uppercase text-nowrap fs-8">Đăng ký biểu mẫu</span>
+                <img th:src="@{/assets/icon/bxs--down-arrow-secondary.png}" alt="menu" data-size="15">
+            </div>
+            <div class="d-flex flex-nowrap align-items-center gap-1 px-2">
+                <span class="text-uppercase text-nowrap fs-8">Lịch làm việc</span>
+                <img th:src="@{/assets/icon/bxs--down-arrow-secondary.png}" alt="menu" data-size="15">
+            </div>
+            <div class="d-flex flex-nowrap align-items-center gap-1 px-2">
+                <span class="text-uppercase text-nowrap fs-8">Đăng ký nghỉ việc</span>
+                <img th:src="@{/assets/icon/bxs--down-arrow-secondary.png}" alt="menu" data-size="15">
+            </div>
+        </div>
+        <div class="d-flex flex-nowrap gap-3 align-items-center bg-white">
+            <img th:src="@{/assets/icon/add.png}" alt="add" data-size="25"/>
+            <img th:src="@{/assets/icon/question-red.png}" alt="add" data-size="25"/>
+            <img th:src="@{/assets/icon/file.png}" alt="add" data-size="30"/>
+            <button class="bg-white border-0 text-secondary">ENG</button>
+            <div class="d-flex flex-nowrap align-items-center">
+                <img th:src="@{/assets/icon/user-circle.png}" alt="user" class="rounded-circle" data-size="40"/>
+                <img th:src="@{/assets/icon/bxs--down-arrow-secondary.png}" alt="add" data-size="15"/>
+            </div>
+        </div>
+    </div>
+</header>
+<main class="p-3 overflow-x-auto overflow-y-hidden">
+    <section class="bg-white w-100 p-4" hidden="hidden">
+        <div class="mb-3 d-flex align-items-center justify-content-between">
+            <h6 class="text-uppercase color-primary">Tất cả đăng ký tăng ca</h6>
+            <div class="d-flex gap-3 align-items-center">
+                <button class="bg-none border-0 d-flex align-items-center gap-1">
+                    <img th:src="@{/assets/icon/filter-green.png}" alt="filter" data-width="25"/>
+                    Tìm kiếm
+                </button>
+                <img th:src="@{/assets/icon/menu-vertical.png}" alt="menu" data-width="25"/>
+            </div>
+        </div>
+
+        <div class="overflow-y-auto">
+            <table class="ln-table border border-2 border-secondary w-100" id="table-sign-up-for-overtime">
+                <thead>
+                <tr class="px-2 gap-3 bg-E4E4E4">
+                    <th class="text-uppercase py-2 fs-7" data-width="300">trạng thái</th>
+                    <th class="text-uppercase py-2 fs-7 border border-2 border-top-0 border-start-0 border-bottom-0 border-secondary"
+                        data-width="150">số phiểu
+                    </th>
+                    <th class="text-uppercase py-2 fs-7" data-width="100">mã sap</th>
+                    <th class="text-uppercase py-2 fs-7" data-width="150">họ tên</th>
+                    <th class="text-uppercase py-2 fs-7" data-width="200">phòng ban/ngành hàng</th>
+                    <th class="text-uppercase py-2 fs-7" data-width="150">bộ phận/nhóm</th>
+                    <th class="text-uppercase py-2 fs-7" data-width="125">nơi làm việc</th>
+                    <th class="text-uppercase py-2 fs-7" data-width="25">no</th>
+                </tr>
+                </thead>
+                <tbody data-style="d-flex px-2 gap-3">
+                <tr>
+                    <td class="d-flex py-1 align-items-center gap-2 fs-7">
+                        <p data-width="12" data-height="12" class="bg-warning rounded-circle"></p>
+                        Đang chờ Bổ sung thời gian thực
+                    </td>
+                    <td class="py-1 fs-7 text-info-emphasis border border-2 border-top-0 border-start-0 border-bottom-0 border-secondary">
+                        OVE-000005644-2024
+                    </td>
+                    <td class="py-1 fs-7">00269708</td>
+                    <td class="py-1 fs-7">Phạm Thị Bích Loan</td>
+                    <td class="py-1 fs-7">CANARY-GMS (G5)</td>
+                    <td class="py-1 fs-7">KIDS - CANARY (G3)</td>
+                    <td class="py-1 fs-7">CANARY - GMS</td>
+                    <td class="py-1 fs-7">17</td>
+                </tr>
+                <tr>
+                    <td class="d-flex py-1 align-items-center gap-2 fs-7">
+                        <p data-width="12" data-height="12" class="bg-success rounded-circle"></p>
+                        Đang chờ Bổ sung thời gian thực
+                    </td>
+                    <td class="py-1 fs-7 text-info-emphasis border border-2 border-top-0 border-start-0 border-bottom-0 border-secondary">
+                        OVE-000005644-2024
+                    </td>
+                    <td class="py-1 fs-7">00269708</td>
+                    <td class="py-1 fs-7">Phạm Thị Bích Loan</td>
+                    <td class="py-1 fs-7">CANARY-GMS (G5)</td>
+                    <td class="py-1 fs-7">KIDS - CANARY (G3)</td>
+                    <td class="py-1 fs-7">CANARY - GMS</td>
+                    <td class="py-1 fs-7">17</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <section class="mt-2">
+        <h5 class="fw-bold color-primary d-inline">Chính sách phúc lợi nhân viên</h5>
+        <button class="bg-none border-0 color-primary fs-6 fw-bold">Learn more?</button>
+        <br/>
+        <ul class="row row-cols-4 list-unstyled">
+            <li class="p-0">
+                <a th:href="@{/user/form-request}" class="row align-items-center m-2 bg-white p-3 text-decoration-none text-dark">
+                    <img th:src="@{/assets/image/big_logo_light.png}" alt="icon" class="col-2 ps-0">
+                    <p class="col-10 p-0 fs-7">
+                        Đăng ký biểu mẫu
+                    </p>
+                </a>
+            </li>
+        </ul>
+        <div class="p-3 bg-white" style="margin-top: -15px">
+            <h5 class="ms-4 fw-bold text-uppercase color-primary">Công việc vần làm</h5>
+            <table class="ln-table border border-2 border-secondary w-100" id="table-to-do">
+                <thead>
+                <tr class="px-2 gap-3 bg-E4E4E4">
+                    <th class="text-uppercase py-2 fs-7" data-width="200"></th>
+                    <th class="text-uppercase py-2 fs-7" data-width="200">trạng thái</th>
+                    <th class="text-uppercase py-2 fs-7" data-width="150">số phiểu</th>
+                    <th class="text-uppercase py-2 fs-7" data-width="150">người đề xuất</th>
+                    <th class="text-uppercase py-2 fs-7" data-width="150">ngày hết bạn</th>
+                    <th class="text-uppercase py-2 fs-7" data-width="150">phòng ban</th>
+                    <th class="text-uppercase py-2 fs-7" data-width="75">miền</th>
+                    <th class="text-uppercase py-2 fs-7" data-width="125">ngày tạo</th>
+                </tr>
+                </thead>
+                <tbody data-style="px-2 gap-3">
+                <tr>
+                    <td class="d-flex py-2 align-items-center gap-2 fs-7">
+                        <p data-width="12" data-height="12" class="bg-warning rounded-circle"></p>
+                        Đăng ký nghỉ việc
+                    </td>
+                    <td class="py-2 fs-7 text-info-emphasis">
+                        OVE-000005644-2024
+                    </td>
+                    <td class="py-2 fs-7">Waiting for HR Review</td>
+                    <td class="py-2 fs-7">Đỗ Mỹ Lan</td>
+                    <td class="py-2 fs-7">20/09/2024</td>
+                    <td class="py-2 fs-7">VIETNAMESE 2 (G1)</td>
+                    <td class="py-2 fs-7">South</td>
+                    <td class="py-2 fs-7">17/09/2024 11:34</td>
+                </tbody>
+                <tfoot class="pin-footer border border-1 border-secondary">
+                <tr class="p-2 d-flex justify-content-between">
+                    <td class="d-flex gap-3 align-items-center">
+                        <img src="/assets/icon/mage--previous-fill.png" alt="top" data-size="15"
+                             class="cursor-pointer"/>
+                        <img src="/assets/icon/bxs--left-arrow.png" alt="pre" data-size="15" class="cursor-pointer"/>
+                        <p class="p-2 border border-1 border-primary d-flex align-items-center justify-content-center text-primary"
+                           data-width="25" data-height="25">
+                            1
+                        </p>
+                        <img src="/assets/icon/bxs--right-arrow.png" alt="pre" data-size="15" class="cursor-pointer"/>
+                        <img src="/assets/icon/mage--next-fill.png" alt="top" data-size="15"
+                             class="cursor-pointer"/>
+                        <label>
+                            <select class="py-1" style="width: 75px">
+                                <option value="10">10</option>
+                                <option value="10">20</option>
+                                <option value="10">30</option>
+                                <option value="10">40</option>
+                                <option value="10">50</option>
+                            </select>
+                            <span class="ms-2 fs-7">Dữ liệu trong trang</span>
+                        </label>
+                    </td>
+                    <td class="fs-7">
+                        1-1 trong 1 dữ liệu
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="p-3 bg-white mt-3">
+            <h5 class="ms-4 fw-bold text-uppercase color-primary">LỊCH SỬ TẠO BIỂU MẪU</h5>
+            <table class="ln-table border border-2 border-secondary w-100" id="table-form-created">
+                <thead class="pin-top">
+                <tr class="px-2 gap-3 bg-E4E4E4">
+                    <th class="text-uppercase py-2 fs-7" data-width="200">Tên biểu mẫu</th>
+                    <th class="text-uppercase py-2 fs-7" data-width="200">Nội dung</th>
+                    <th class="text-uppercase py-2 fs-7" data-width="120">Ngày bắt đầu</th>
+                    <th class="text-uppercase py-2 fs-7" data-width="120">Ngày kết thúc</th>
+                    <th class="text-uppercase py-2 fs-7" data-width="250">Ngày tạo</th>
+                    <th class="text-uppercase py-2 fs-7" data-width="250">Ngày duyệt</th>
+                    <th class="text-uppercase py-2 fs-7" data-width="160">Trạng thái</th>
+                </tr>
+                </thead>
+                <tbody data-style="px-2 gap-3">
+                <!-- Duyệt qua danh sách biểu mẫu đã tạo bởi nhân viên -->
+                <tr th:each="formRequest : ${formRequests}">
+                    <td class="d-flex py-2 align-items-center gap-2 fs-7">
+                        <p data-width="12" data-height="12" class="bg-warning rounded-circle"></p>
+                        <span th:text="${formRequest.formType}">Tên biểu mẫu</span>
+                    </td>
+                    <td class="py-2 fs-7">
+                        <span th:text="${formRequest.additionalInfo}">Nội dung</span>
+                    </td>
+                    <td class="py-2 fs-7">
+                        <span th:text="${#dates.format(formRequest.startDate, 'dd/MM/yyyy')}">Ngày bắt đầu</span>
+                    </td>
+                    <td class="py-2 fs-7">
+                        <span th:text="${#dates.format(formRequest.endDate, 'dd/MM/yyyy')}">Ngày kết thúc</span>
+                    </td>
+                    <td class="py-2 fs-7">
+                        <span th:text="${#dates.format(formRequest.creationDate, 'dd/MM/yyyy HH:mm')}">Ngày tạo</span>
+                    </td>
+                    <td class="py-2 fs-7">
+                        <span th:text="${#dates.format(formRequest.approvalDate, 'dd/MM/yyyy HH:mm')}">Ngày duyệt</span>
+                    </td>
+                    <td class="d-flex py-2 align-items-center gap-2 fs-7">
+                        <p data-width="12" data-height="12" class="bg-warning rounded-circle"></p>
+                        <span th:text="${formRequest.status == null ? 'Đang chờ duyệt' : (formRequest.status == 0 ? 'Không duyệt' : 'Đã duyệt')}"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+</main>
+<script th:src="@{/assets/js/main.js}"></script>
+<script th:src="@{/assets/js/employee.js}"></script>
+</body>
+</html>

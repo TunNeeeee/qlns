@@ -49,7 +49,7 @@ public class SecurityConfig {
                         .permitAll() // Cho phép truy cập không cần xác thực.
                         .requestMatchers("/admin/**")
                         .hasAnyAuthority("ADMIN") // Chỉ cho phép ADMIN truy cập.
-                        .requestMatchers("/user/**")
+                        .requestMatchers("/user/**","/user")
                         .hasAnyAuthority("USER")
                         .requestMatchers("/api/**")
                         .permitAll() // API mở cho mọi người dùng.
