@@ -9,4 +9,7 @@ $(document).ready(function () {
     loadFrameTable("#table-sign-up-for-overtime");
     loadFrameTable("#table-to-do");
     loadFrameTable("#table-form-created");
+    loadFrameTable("#table-att")
+    repaintTable("#table-form-created")
+    repaintTable("#table-att")
 })

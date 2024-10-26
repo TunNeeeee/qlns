@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Future;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Setter
@@ -23,13 +25,13 @@ public class Attendance {
     private Employee employee;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date attendanceDate; // Ngày chấm công
+    private LocalDate attendanceDate; // Ngày chấm công
 
     @DateTimeFormat(pattern = "HH:mm")
-    private Date checkInTime; // Thời gian vào
+    private LocalTime checkInTime; // Thời gian vào
 
     @DateTimeFormat(pattern = "HH:mm")
-    private Date checkOutTime; // Thời gian ra
+    private LocalTime checkOutTime; // Thời gian ra
 
     @ManyToOne
     @JoinColumn(name = "work_schedule_id", nullable = false)

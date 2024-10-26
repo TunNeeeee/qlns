@@ -134,67 +134,52 @@
             </li>
         </ul>
         <div class="p-3 bg-white" style="margin-top: -15px">
-            <h5 class="ms-4 fw-bold text-uppercase color-primary">Công việc vần làm</h5>
-            <table class="ln-table border border-2 border-secondary w-100" id="table-to-do">
+            <h5 class="ms-4 fw-bold text-uppercase color-primary">Attendance Records</h5>
+
+            <!-- Bảng hiển thị danh sách chấm công -->
+            <table class="ln-table border border-2 border-secondary w-100" id="table-att">
                 <thead>
                 <tr class="px-2 gap-3 bg-E4E4E4">
-                    <th class="text-uppercase py-2 fs-7" data-width="200"></th>
-                    <th class="text-uppercase py-2 fs-7" data-width="200">trạng thái</th>
-                    <th class="text-uppercase py-2 fs-7" data-width="150">số phiểu</th>
-                    <th class="text-uppercase py-2 fs-7" data-width="150">người đề xuất</th>
-                    <th class="text-uppercase py-2 fs-7" data-width="150">ngày hết bạn</th>
-                    <th class="text-uppercase py-2 fs-7" data-width="150">phòng ban</th>
-                    <th class="text-uppercase py-2 fs-7" data-width="75">miền</th>
-                    <th class="text-uppercase py-2 fs-7" data-width="125">ngày tạo</th>
+                    <th class="text-uppercase py-2 fs-7" data-width="200">Ngày chấm công</th>
+                    <th class="text-uppercase py-2 fs-7" data-width="200">Thời gian check in</th>
+                    <th class="text-uppercase py-2 fs-7" data-width="200">Thời gian check out</th>
+                    <!-- <th class="text-uppercase py-2 fs-7" data-width="200">Status</th> -->
                 </tr>
                 </thead>
-                <tbody data-style="px-2 gap-3">
-                <tr>
-                    <td class="d-flex py-2 align-items-center gap-2 fs-7">
-                        <p data-width="12" data-height="12" class="bg-warning rounded-circle"></p>
-                        Đăng ký nghỉ việc
-                    </td>
-                    <td class="py-2 fs-7 text-info-emphasis">
-                        OVE-000005644-2024
-                    </td>
-                    <td class="py-2 fs-7">Waiting for HR Review</td>
-                    <td class="py-2 fs-7">Đỗ Mỹ Lan</td>
-                    <td class="py-2 fs-7">20/09/2024</td>
-                    <td class="py-2 fs-7">VIETNAMESE 2 (G1)</td>
-                    <td class="py-2 fs-7">South</td>
-                    <td class="py-2 fs-7">17/09/2024 11:34</td>
-                </tbody>
-                <tfoot class="pin-footer border border-1 border-secondary">
-                <tr class="p-2 d-flex justify-content-between">
-                    <td class="d-flex gap-3 align-items-center">
-                        <img src="/assets/icon/mage--previous-fill.png" alt="top" data-size="15"
-                             class="cursor-pointer"/>
-                        <img src="/assets/icon/bxs--left-arrow.png" alt="pre" data-size="15" class="cursor-pointer"/>
-                        <p class="p-2 border border-1 border-primary d-flex align-items-center justify-content-center text-primary"
-                           data-width="25" data-height="25">
-                            1
-                        </p>
-                        <img src="/assets/icon/bxs--right-arrow.png" alt="pre" data-size="15" class="cursor-pointer"/>
-                        <img src="/assets/icon/mage--next-fill.png" alt="top" data-size="15"
-                             class="cursor-pointer"/>
-                        <label>
-                            <select class="py-1" style="width: 75px">
-                                <option value="10">10</option>
-                                <option value="10">20</option>
-                                <option value="10">30</option>
-                                <option value="10">40</option>
-                                <option value="10">50</option>
-                            </select>
-                            <span class="ms-2 fs-7">Dữ liệu trong trang</span>
-                        </label>
-                    </td>
-                    <td class="fs-7">
-                        1-1 trong 1 dữ liệu
-                    </td>
+                <tbody>
+                <!-- Kiểm tra nếu attendanceRecords có dữ liệu -->
+                <tr th:if="${#lists.isEmpty(attendanceRecords)}">
+                    <td colspan="3" class="text-center py-2 fs-7">Không có bản ghi nào</td>
                 </tr>
-                </tfoot>
+                <!-- Duyệt qua danh sách chấm công của nhân viên -->
+                <tr th:each="attendance : ${attendanceRecords}">
+                    <td class="py-2 fs-7">
+                        <span th:text="${#dates.format(attendance.attendanceDate, 'dd/MM/yyyy')}"></span> <!-- Ngày chấm công -->
+                    </td>
+                    <td class="py-2 fs-7">
+                        <!-- Định dạng thời gian Check-in -->
+                        <span th:text="${attendance.checkInTime != null ? #dates.format(attendance.checkInTime, 'HH:mm') : 'Not Checked In'}"></span>
+                    </td>
+                    <td class="py-2 fs-7">
+                        <!-- Định dạng thời gian Check-out -->
+                        <span th:text="${attendance.checkOutTime != null ? #dates.format(attendance.checkOutTime, 'HH:mm') : 'Not Checked Out'}"></span>
+                    </td>
+                    <!-- <td class="py-2 fs-7"> -->
+                    <!--     <span th:text="${attendance.status != null ? attendance.status : 'Absent'}"></span> -->
+                    <!-- </td> -->
+                </tr>
+                </tbody>
             </table>
+
+            <!-- Nút Check-in -->
+            <form th:action="@{/user/checkin}" method="post">
+                <button type="submit" class="btn btn-primary mt-3">Check-in</button>
+            </form>
         </div>
+
+
+
+
         <div class="p-3 bg-white mt-3">
             <h5 class="ms-4 fw-bold text-uppercase color-primary">LỊCH SỬ TẠO BIỂU MẪU</h5>
             <table class="ln-table border border-2 border-secondary w-100" id="table-form-created">
