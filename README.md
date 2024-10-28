@@ -35,9 +35,9 @@
 ## How to Use
 Once both the backend and frontend are successfully set up and running, the system can be accessed via the browser at http://localhost:8080.
 
-Login:
+**Login**
 ![image](https://github.com/user-attachments/assets/00637f86-af88-44e8-9553-57fb46b293a4)
-**Admin Page:**
+**Admin Page**
 ![image](https://github.com/user-attachments/assets/1dc3f193-ee76-40b6-84fc-13b49aa9835c)
 **Personnel Manager**
 ![image](https://github.com/user-attachments/assets/6e642a8b-b996-4f34-b698-605303edde5d)
