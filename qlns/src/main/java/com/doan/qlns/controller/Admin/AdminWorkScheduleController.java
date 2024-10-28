@@ -4,6 +4,9 @@ import com.doan.qlns.models.Employee;
 import com.doan.qlns.models.WorkSchedule;
 import com.doan.qlns.service.EmployeeService;
 import com.doan.qlns.service.WorkScheduleService;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,11 +20,11 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin/schedule")
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@AllArgsConstructor
 public class AdminWorkScheduleController {
-    @Autowired
-    private WorkScheduleService workScheduleService;
-    @Autowired
-    private EmployeeService employeeService;
+    WorkScheduleService workScheduleService;
+    EmployeeService employeeService;
 
     @GetMapping("/create")
     public String showCreateScheduleForm(Model model) {
@@ -56,7 +59,6 @@ public class AdminWorkScheduleController {
     }
 
 
-
     @GetMapping("/list")
     public String getScheduleList(Model model) {
         List<WorkSchedule> workSchedules = workScheduleService.getAllSchedules();
@@ -75,6 +77,7 @@ public class AdminWorkScheduleController {
         model.addAttribute("workSchedules", formattedSchedules); // Thêm danh sách đã định dạng vào model
         return "admin/schedule/list"; // Trả về view
     }
+
     public static class FormattedSchedule {
         private String employeeName;
         private String shift;

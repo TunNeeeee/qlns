@@ -24,6 +24,7 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import static com.doan.qlns.DateUtils.convertDateToLocalDateTime;
 
@@ -58,8 +59,6 @@ public class UserController {
         // Lấy danh sách biểu mẫu đã tạo bởi nhân viên hiện tại
         List<FormRequest> formRequests = formRequestService.getFormRequestsByEmployeeId(currentEmployee.getId());
         model.addAttribute("formRequests", formRequests);
-
-        LocalDate today = LocalDate.now();
         List<Attendance> attendanceRecords = attendanceService.getAttendanceByEmployeeId(currentEmployee.getId());
 
         // Kiểm tra null cho attendanceRecords (nếu cần)
@@ -110,7 +109,7 @@ public class UserController {
     }
     */
     @PostMapping("/checkin")
-    public String checkIn(@ModelAttribute Attendance attendance, @AuthenticationPrincipal Employee employee) {
+    public String checkIn(@ModelAttribute Attendance attendance, @AuthenticationPrincipal Employee employee, Model model) {
         // Lấy tên người dùng
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
@@ -123,6 +122,15 @@ public class UserController {
 
         // Lấy thời gian hiện tại
         LocalDateTime now = LocalDateTime.now();
+        LocalDate today = LocalDate.now();
+        // Kiểm tra xem nhân viên đã check-in vào ngày hôm nay chưa
+        Optional<Attendance> attendanceRecord = attendanceService.findByEmployeeAndDate(currentEmployee, today);
+
+        if (attendanceRecord.isPresent()) {
+            // Nếu đã check-in, trả về thông báo lỗi
+            model.addAttribute("error", "Bạn đã check-in trong ngày hôm nay rồi.");
+            return "redirect:/user/index";  // Trang hiển thị bảng chấm công
+        }
 
         // Cập nhật thông tin attendance
         attendance.setEmployee(currentEmployee); // Gán employee vào attendance

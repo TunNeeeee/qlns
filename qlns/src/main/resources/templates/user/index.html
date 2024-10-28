@@ -12,7 +12,7 @@
 </head>
 <body>
 <header class="d-flex flex-nowrap bg-primary overflow-y-hidden align-items-center">
-    <img th:src="@{/assets/image/big_logo_light.png}" alt="logo" class="col-5" style="height: 45px; width: 150px">
+    <img th:src="@{/assets/image/aeon-750x468.jpg}" alt="logo" class="col-5" style="height: 45px; width: 150px">
     <div class="d-flex flex-nowrap bg-white w-100 justify-content-between" style="margin-top: 5px">
         <div class="d-flex flex-nowrap">
             <div class="d-flex flex-nowrap align-items-center gap-2 bg-primary px-2">
@@ -126,7 +126,7 @@
         <ul class="row row-cols-4 list-unstyled">
             <li class="p-0">
                 <a th:href="@{/user/form-request}" class="row align-items-center m-2 bg-white p-3 text-decoration-none text-dark">
-                    <img th:src="@{/assets/image/big_logo_light.png}" alt="icon" class="col-2 ps-0">
+                    <img th:src="@{/assets/image/aeon-750x468.jpg}" alt="icon" class="col-2 ps-0">
                     <p class="col-10 p-0 fs-7">
                         Đăng ký biểu mẫu
                     </p>
@@ -134,7 +134,7 @@
             </li>
         </ul>
         <div class="p-3 bg-white" style="margin-top: -15px">
-            <h5 class="ms-4 fw-bold text-uppercase color-primary">Attendance Records</h5>
+            <h5 class="ms-4 fw-bold text-uppercase color-primary">Bảng chấm công</h5>
 
             <!-- Bảng hiển thị danh sách chấm công -->
             <table class="ln-table border border-2 border-secondary w-100" id="table-att">
@@ -143,30 +143,25 @@
                     <th class="text-uppercase py-2 fs-7" data-width="200">Ngày chấm công</th>
                     <th class="text-uppercase py-2 fs-7" data-width="200">Thời gian check in</th>
                     <th class="text-uppercase py-2 fs-7" data-width="200">Thời gian check out</th>
-                    <!-- <th class="text-uppercase py-2 fs-7" data-width="200">Status</th> -->
                 </tr>
                 </thead>
-                <tbody>
+                <tbody data-style="px-2 gap-3">
                 <!-- Kiểm tra nếu attendanceRecords có dữ liệu -->
                 <tr th:if="${#lists.isEmpty(attendanceRecords)}">
                     <td colspan="3" class="text-center py-2 fs-7">Không có bản ghi nào</td>
                 </tr>
-                <!-- Duyệt qua danh sách chấm công của nhân viên -->
-                <tr th:each="attendance : ${attendanceRecords}">
+                <tr th:unless="${#lists.isEmpty(attendanceRecords)}" th:each="attendance : ${attendanceRecords}">
                     <td class="py-2 fs-7">
-                        <span th:text="${#dates.format(attendance.attendanceDate, 'dd/MM/yyyy')}"></span> <!-- Ngày chấm công -->
+                        <span th:text=" ${#temporals.format(attendance.attendanceDate, 'dd/MM/yyyy')}">Ngày chấm công</span> <!-- Ngày chấm công -->
                     </td>
                     <td class="py-2 fs-7">
                         <!-- Định dạng thời gian Check-in -->
-                        <span th:text="${attendance.checkInTime != null ? #dates.format(attendance.checkInTime, 'HH:mm') : 'Not Checked In'}"></span>
+                        <span th:text="${attendance.checkInTime != null ? #temporals.format(attendance.checkInTime, 'HH:mm') : 'Not Checked In'}"></span>
                     </td>
                     <td class="py-2 fs-7">
                         <!-- Định dạng thời gian Check-out -->
-                        <span th:text="${attendance.checkOutTime != null ? #dates.format(attendance.checkOutTime, 'HH:mm') : 'Not Checked Out'}"></span>
+                        <span th:text="${attendance.checkOutTime != null ? #temporals.format(attendance.checkOutTime, 'HH:mm') : 'Not Checked Out'}"></span>
                     </td>
-                    <!-- <td class="py-2 fs-7"> -->
-                    <!--     <span th:text="${attendance.status != null ? attendance.status : 'Absent'}"></span> -->
-                    <!-- </td> -->
                 </tr>
                 </tbody>
             </table>
